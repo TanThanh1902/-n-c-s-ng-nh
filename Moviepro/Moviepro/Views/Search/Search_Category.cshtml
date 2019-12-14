@@ -1,0 +1,87 @@
+﻿@using Moviepro.Models;
+@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<TSql_Film_Category>
+@{
+    ViewBag.Title = "Search_Category";
+    Layout = "~/Views/Layout/UserLayout.cshtml";
+}
+
+@Html.Action("Home", "Menu")
+<div class="general">
+    <h4 class="latest-text w3_latest_text">Category > @Session["Cate"]</h4>
+    <div class="container">
+        @if (ViewBag.danger != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.danger
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-success" role="alert">
+                @ViewBag.success
+            </div>
+        }
+        <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+            <div class="general">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-2 w3l-movie-gride-agile">
+                        <a href="@Url.Action("Index", "Comments", new { @id = item.TSql_Films.IDFilm})" class="hvr-shutter-out-horizontal">
+                            <img src="@Url.Content("~/content/images/" + item.TSql_Films.Image)" title="album-name" class="img-responsive" alt=" " style="height: 270px; width: 100%" />
+                            <div class="w3l-action-icon"><i class="fas fa-play-circle" aria-hidden="true"></i></div>
+                        </a>
+                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                            <div class="w3l-movie-text">
+                                <h6><a href="@Url.Action("Index", "Comments", new { @id = item.TSql_Films.IDFilm})">@item.TSql_Films.FilmName</a></h6>
+                            </div>
+                            <div class="mid-2 agile_mid_2_home">
+                                <p>@item.TSql_Films.DateSubmited.Value.Year</p>
+                                @{
+                                    Int32 tmp = (Int32)item.TSql_Films.Rating;
+                                    if (tmp != item.TSql_Films.Rating)
+                                    {
+                                        <div class="block-stars">
+                                            <ul class="w3l-ratings">
+                                                @for (int k = 0; k < tmp; k++)
+                                                {
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                }
+                                                <li><i class="fa fa-star-half-alt" aria-hidden="true"></i></li>
+                                            </ul>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="block-stars">
+                                            <ul class="w3l-ratings">
+                                                @for (int k = 0; k < tmp; k++)
+                                                {
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="ribben">
+                            <p>NEW</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div style="margin-left: 45%">
+    @*PageNumber @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount*@
+    @Html.PagedListPager(Model, Page => Url.Action("Search_Category", new { Page = Page }))
+</div>
+
+

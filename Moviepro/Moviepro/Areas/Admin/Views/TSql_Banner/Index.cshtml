@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Moviepro.Models.TSql_Banner>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .mau {
+        color: black;
+    }
+</style>
+<h2 style="color: red;text-align: center">Banner</h2>
+
+<hr />
+<table class="table table-striped" style="border:1px solid black;color: black">
+    <tr style="background-color: orange;">
+        <th>
+            <b class="mau"><i class="fa fa-film">&nbsp;</i>FilmName</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-image">&nbsp;</i>Image</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-clock">&nbsp;</i>Descriptions</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-tools">&nbsp;</i>Tools</b>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FilmName)
+            </td>
+            <td>
+                <img src="@Url.Content("~/Content/images/" + item.Banner)" style="width: 300px; height: 170px" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a href="/Admin/TSql_Banner/Edit/@item.IDBanner"><b><i class="fa fa-edit"></i></b></a>
+            </td>
+        </tr>
+    }
+</table>

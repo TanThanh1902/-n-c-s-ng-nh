@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBMovieModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TSql_Admin">
+    <Key>
+      <PropertyRef Name="IDAdmin" />
+    </Key>
+    <Property Name="IDAdmin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TSql_Banner">
+    <Key>
+      <PropertyRef Name="IDBanner" />
+    </Key>
+    <Property Name="IDBanner" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Banner" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FilmName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TSql_Categorys">
+    <Key>
+      <PropertyRef Name="IDCategory" />
+    </Key>
+    <Property Name="IDCategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TSql_Chat">
+    <Key>
+      <PropertyRef Name="IDChat" />
+    </Key>
+    <Property Name="IDChat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDAdmin" Type="int" Nullable="false" />
+    <Property Name="RoleAdmin" Type="int" Nullable="false" />
+    <Property Name="Chat" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateChat" Type="datetime" />
+    <Property Name="IDUser" Type="int" />
+  </EntityType>
+  <EntityType Name="TSql_Comment">
+    <Key>
+      <PropertyRef Name="IDComment" />
+    </Key>
+    <Property Name="IDComment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDFilm" Type="int" Nullable="false" />
+    <Property Name="IDInfo" Type="int" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+    <Property Name="DatePost" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TSql_Country">
+    <Key>
+      <PropertyRef Name="IDCountry" />
+    </Key>
+    <Property Name="IDCountry" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TSql_Film_Category">
+    <Key>
+      <PropertyRef Name="IDFilm_Category" />
+    </Key>
+    <Property Name="IDFilm_Category" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDFilm" Type="int" Nullable="false" />
+    <Property Name="IDCategory" Type="int" Nullable="false" />
+    <Property Name="DateCreate" Type="date" />
+    <Property Name="DateUpdate" Type="date" />
+  </EntityType>
+  <EntityType Name="TSql_Films">
+    <Key>
+      <PropertyRef Name="IDFilm" />
+    </Key>
+    <Property Name="IDFilm" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FilmName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Time" Type="int" />
+    <Property Name="Author" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateSubmited" Type="date" />
+    <Property Name="Image" Type="nvarchar(max)" />
+    <Property Name="Banner" Type="nvarchar(max)" />
+    <Property Name="IDCountry" Type="int" />
+    <Property Name="Rating" Type="float" />
+    <Property Name="Views" Type="int" />
+    <Property Name="LinkFilm" Type="nvarchar(max)" />
+    <Property Name="Trailer" Type="nvarchar(max)" />
+    <Property Name="Download" Type="nvarchar(max)" />
+    <Property Name="Languages" Type="nvarchar(max)" />
+    <Property Name="TypeFilm" Type="nvarchar(max)" />
+    <Property Name="Votes" Type="int" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="TSql_Informations">
+    <Key>
+      <PropertyRef Name="IDInfo" />
+    </Key>
+    <Property Name="IDInfo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Role" Type="int" Nullable="false" />
+    <Property Name="DateCreate" Type="datetime" />
+    <Property Name="ForgotPasswordCode" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TSql_Reply">
+    <Key>
+      <PropertyRef Name="IDReply" />
+    </Key>
+    <Property Name="IDReply" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDComment" Type="int" Nullable="false" />
+    <Property Name="Reply" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IDInfo" Type="int" />
+    <Property Name="DatePost" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_TSql_Chat_TSql_Admin">
+    <End Role="TSql_Admin" Type="Self.TSql_Admin" Multiplicity="1" />
+    <End Role="TSql_Chat" Type="Self.TSql_Chat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSql_Admin">
+        <PropertyRef Name="IDAdmin" />
+      </Principal>
+      <Dependent Role="TSql_Chat">
+        <PropertyRef Name="IDAdmin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSql_Chat_TSql_Informations">
+    <End Role="TSql_Informations" Type="Self.TSql_Informations" Multiplicity="0..1" />
+    <End Role="TSql_Chat" Type="Self.TSql_Chat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSql_Informations">
+        <PropertyRef Name="IDInfo" />
+      </Principal>
+      <Dependent Role="TSql_Chat">
+        <PropertyRef Name="IDUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSql_Comment_TSql_Films">
+    <End Role="TSql_Films" Type="Self.TSql_Films" Multiplicity="1" />
+    <End Role="TSql_Comment" Type="Self.TSql_Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSql_Films">
+        <PropertyRef Name="IDFilm" />
+      </Principal>
+      <Dependent Role="TSql_Comment">
+        <PropertyRef Name="IDFilm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSql_Comment_TSql_Informations">
+    <End Role="TSql_Informations" Type="Self.TSql_Informations" Multiplicity="0..1" />
+    <End Role="TSql_Comment" Type="Self.TSql_Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSql_Informations">
+        <PropertyRef Name="IDInfo" />
+      </Principal>
+      <Dependent Role="TSql_Comment">
+        <PropertyRef Name="IDInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSql_Film_Category_TSql_Categorys">
+    <End Role="TSql_Categorys" Type="Self.TSql_Categorys" Multiplicity="1" />
+    <End Role="TSql_Film_Category" Type="Self.TSql_Film_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSql_Categorys">
+        <PropertyRef Name="IDCategory" />
+      </Principal>
+      <Dependent Role="TSql_Film_Category">
+        <PropertyRef Name="IDCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSql_Film_Category_TSql_Films">
+    <End Role="TSql_Films" Type="Self.TSql_Films" Multiplicity="1" />
+    <End Role="TSql_Film_Category" Type="Self.TSql_Film_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSql_Films">
+        <PropertyRef Name="IDFilm" />
+      </Principal>
+      <Dependent Role="TSql_Film_Category">
+        <PropertyRef Name="IDFilm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSql_Films_TSql_Country">
+    <End Role="TSql_Country" Type="Self.TSql_Country" Multiplicity="0..1" />
+    <End Role="TSql_Films" Type="Self.TSql_Films" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSql_Country">
+        <PropertyRef Name="IDCountry" />
+      </Principal>
+      <Dependent Role="TSql_Films">
+        <PropertyRef Name="IDCountry" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSql_Reply_TSql_Comment">
+    <End Role="TSql_Comment" Type="Self.TSql_Comment" Multiplicity="1" />
+    <End Role="TSql_Reply" Type="Self.TSql_Reply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSql_Comment">
+        <PropertyRef Name="IDComment" />
+      </Principal>
+      <Dependent Role="TSql_Reply">
+        <PropertyRef Name="IDComment" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSql_Reply_TSql_Informations">
+    <End Role="TSql_Informations" Type="Self.TSql_Informations" Multiplicity="0..1" />
+    <End Role="TSql_Reply" Type="Self.TSql_Reply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSql_Informations">
+        <PropertyRef Name="IDInfo" />
+      </Principal>
+      <Dependent Role="TSql_Reply">
+        <PropertyRef Name="IDInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBMovieModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TSql_Admin" EntityType="Self.TSql_Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TSql_Banner" EntityType="Self.TSql_Banner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TSql_Categorys" EntityType="Self.TSql_Categorys" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TSql_Chat" EntityType="Self.TSql_Chat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TSql_Comment" EntityType="Self.TSql_Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TSql_Country" EntityType="Self.TSql_Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TSql_Film_Category" EntityType="Self.TSql_Film_Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TSql_Films" EntityType="Self.TSql_Films" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TSql_Informations" EntityType="Self.TSql_Informations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TSql_Reply" EntityType="Self.TSql_Reply" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_TSql_Chat_TSql_Admin" Association="Self.FK_TSql_Chat_TSql_Admin">
+      <End Role="TSql_Admin" EntitySet="TSql_Admin" />
+      <End Role="TSql_Chat" EntitySet="TSql_Chat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSql_Chat_TSql_Informations" Association="Self.FK_TSql_Chat_TSql_Informations">
+      <End Role="TSql_Informations" EntitySet="TSql_Informations" />
+      <End Role="TSql_Chat" EntitySet="TSql_Chat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSql_Comment_TSql_Films" Association="Self.FK_TSql_Comment_TSql_Films">
+      <End Role="TSql_Films" EntitySet="TSql_Films" />
+      <End Role="TSql_Comment" EntitySet="TSql_Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSql_Comment_TSql_Informations" Association="Self.FK_TSql_Comment_TSql_Informations">
+      <End Role="TSql_Informations" EntitySet="TSql_Informations" />
+      <End Role="TSql_Comment" EntitySet="TSql_Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSql_Film_Category_TSql_Categorys" Association="Self.FK_TSql_Film_Category_TSql_Categorys">
+      <End Role="TSql_Categorys" EntitySet="TSql_Categorys" />
+      <End Role="TSql_Film_Category" EntitySet="TSql_Film_Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSql_Film_Category_TSql_Films" Association="Self.FK_TSql_Film_Category_TSql_Films">
+      <End Role="TSql_Films" EntitySet="TSql_Films" />
+      <End Role="TSql_Film_Category" EntitySet="TSql_Film_Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSql_Films_TSql_Country" Association="Self.FK_TSql_Films_TSql_Country">
+      <End Role="TSql_Country" EntitySet="TSql_Country" />
+      <End Role="TSql_Films" EntitySet="TSql_Films" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSql_Reply_TSql_Comment" Association="Self.FK_TSql_Reply_TSql_Comment">
+      <End Role="TSql_Comment" EntitySet="TSql_Comment" />
+      <End Role="TSql_Reply" EntitySet="TSql_Reply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSql_Reply_TSql_Informations" Association="Self.FK_TSql_Reply_TSql_Informations">
+      <End Role="TSql_Informations" EntitySet="TSql_Informations" />
+      <End Role="TSql_Reply" EntitySet="TSql_Reply" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

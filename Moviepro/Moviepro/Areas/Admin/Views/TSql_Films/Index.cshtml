@@ -1,0 +1,95 @@
+﻿@using PagedList.Mvc
+@using PagedList
+@model PagedList.PagedList<Moviepro.Models.TSql_Films>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .mau {
+        color: black;
+    }
+</style>
+<h2 style="color: red;text-align:center">Films</h2>
+<a href="@Url.Action("Create", "TSql_Films")" class="btn btn-danger">Create New</a>
+<hr />
+<table class="table table-striped" style="border:1px solid black;color: black">
+    <tr style="background-color: orange;">
+        <th>
+            <b class="mau">IDFilm</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-film">&nbsp;</i>FilmName</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-image">&nbsp;</i>Image</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-clock">&nbsp;</i>Time</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-user-secret">&nbsp;</i>Author</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-star">&nbsp;</i>Rating</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-eye">&nbsp;</i>Views</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-globe">&nbsp;</i>Country</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-calendar-alt">&nbsp;</i>DateSubmited</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-tools">&nbsp;</i>Tools</b>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDFilm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FilmName)
+            </td>
+            <td>
+                <img src="@Url.Content("~/Content/images/" + item.Image)" style="width: 120px; height: 170px" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @{ float tmp = (float)item.Rating;}
+                @tmp.ToString("0.0")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Views)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TSql_Country.CountryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateSubmited)
+            </td>
+            <td>
+                <a href="/Admin/TSql_Films/Edit/@item.IDFilm"><b><i class="fa fa-edit"></i></b></a>
+                <a href="/Admin/TSql_Films/Details/@item.IDFilm"><b><i class="fa fa-eye"></i></b></a>
+                <a href="@Url.Action("DeleteConfirmed", "TSql_Films", new { @id = item.IDFilm })" onclick="return confirm('Are your sure?')"><b><i class="fa fa-trash-alt"></i></b></a>
+            </td>
+        </tr>
+    }
+
+</table>
+<div style="float: right">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page = Page }))
+</div>
+

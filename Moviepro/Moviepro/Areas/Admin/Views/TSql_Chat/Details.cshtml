@@ -1,0 +1,43 @@
+﻿@model Moviepro.Models.TSql_Chat
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TSql_Chat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Chat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateChat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateChat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TSql_Informations.DisplayName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TSql_Informations.DisplayName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDChat }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

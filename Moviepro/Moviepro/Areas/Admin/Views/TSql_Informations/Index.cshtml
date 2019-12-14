@@ -1,0 +1,78 @@
+﻿@using Moviepro.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<TSql_Informations>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    if (Session["ad"] == null)
+    {
+        Response.Redirect("/Home/Index");
+    }
+}
+
+<style>
+    .mau {
+        color: black;
+    }
+</style>
+<h2 style="color: red;text-align:center">Information</h2>
+<hr />
+<table class="table table-striped" style="border:1px solid black;color: black">
+    <tr style="background-color: orange;">
+        <th>
+            <b class="mau">IDInformation</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-user-tag">&nbsp;</i>DisplayName</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-user-alt">&nbsp;</i>UserName</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-key">&nbsp;</i>Password</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-wifi">&nbsp;</i>Role</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-calendar-alt">&nbsp;</i>DateCreate</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-tools">&nbsp;</i>Tool</b>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisplayName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreate)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "TSql_Informations", new { id = item.IDInfo })"><b><i class="fa fa-edit"></i></b></a> |
+                <a href="@Url.Action("DeleteConfirmed", "TSql_Informations", new { id = item.IDInfo })" onclick="return confirm('Are you sure?')"><b><i class="fa fa-trash-alt"></i></b></a>
+            </td>
+        </tr>
+    }
+
+</table>
+<div style="float: right">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page = Page }))
+</div>

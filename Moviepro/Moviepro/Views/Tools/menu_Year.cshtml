@@ -1,0 +1,14 @@
+﻿<a href="#" class="dropdown-toggle" data-toggle="dropdown">Year <b class="caret"></b></a>
+<ul class="dropdown-menu multi-column columns-3">
+    <li>
+        @for (int i = 2017; i <= DateTime.Now.Year;i++)
+        {
+            <div class="col-sm-4">
+                <ul class="multi-column-dropdown">
+                    <li><a href="@Url.Action("Year", "FilterbyYear", new { @year = i })">@i</a></li>
+                </ul>
+            </div>
+        }
+        <div class="clearfix"></div>
+    </li>
+</ul>

@@ -1,0 +1,40 @@
+﻿<div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="w3layouts_logo" style="font-size: 15px; margin-left: 35%">
+                    <a href="/Home/Index"><h1>One<span>Movies</span></h1></a>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <section style="background-image: url('../../Content/images/Top-50-hình-ảnh-hình-nền-màu-trắng-đẹp-nhất-14.jpg');">
+                <div class="modal-body">
+                    <div class="w3_login_module">
+                        <div class="module form-module">
+                            <div class="toggle">
+                                <i class="fa fa-pencil-alt"></i>
+                                <div class="tooltip">Sign up</div>
+                            </div>
+                            <div class="form">
+                                <h3 style="text-align: center">Login to your account</h3>
+                                <form action="@Url.Action("SignIn", "Accounts")" method="post">
+                                    <input type="text" name="txtUserName" placeholder="Username" required="" class="form-control">
+                                    <input type="password" name="txtPassword" placeholder="Password" required="" class="form-control">
+                                    <input type="submit" value="Login">
+                                </form>
+
+                                <a href="@Url.Action("SendEmail", "ForgotPassword")">Forgot your password?</a>
+                            </div>
+                            <div class="form">
+                                <h3 style="text-align: center">Create an account</h3>
+                                @Html.Action("SignUp", "Accounts")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,122 @@
+﻿@model Moviepro.Models.TSql_Films
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Int32 rate = (Int32)Model.Rating;
+}
+
+    <style>
+        .genres {
+            color: black;
+        }
+
+            .genres:hover {
+                color: orange;
+            }
+
+        .listdetails li {
+            list-style-type: none;
+            text-decoration: none;
+            font-size: 17px;
+        }
+    </style>
+
+<div>
+    <h2 style="color: red; text-align:center">Film Details</h2>
+    <div>
+        <div class="horizontal">
+            <div class="container">
+                <hr />
+                <div class="col-6" style="float:left">
+                    <img src="@Url.Content("~/Content/Images/" + Model.Image)" />
+                </div>
+                <div class="col-6 " style="margin-left: 200px; width: 50%">
+                    <ul class="listdetails">
+                        <li>
+                            <h1 class="title">
+                                <span class="zmdi-filter-tilt-shift" style="color:orange">@Html.DisplayFor(model => model.FilmName)</span>
+                            </h1>
+                        </li>
+
+                        <li>
+                            <b>Time: </b>
+                            @Html.DisplayFor(model => model.Time)
+                        </li>
+
+                        <li>
+                            <b>Author: </b>
+                            @Html.DisplayFor(model => model.Author)
+                        </li>
+
+                        <li>
+                            <b>Genres: </b>
+                            @{
+                                Int32 tmp = new int();
+                                foreach (var item in Model.TSql_Film_Category)
+                                {
+                                    tmp = item.IDCategory;
+                                }
+                                foreach (var item in Model.TSql_Film_Category)
+                                {
+                                    <a href="@Url.Action("Search_Category", "Search", new { id = item.IDCategory })" class="genres">@item.TSql_Categorys.CategoryName</a>
+                                    if (tmp != item.IDCategory)
+                                    {
+                                        <b>|</b>
+                                    }
+                                }
+                            }
+                        </li>
+
+                        <li>
+                            <b>DateSubmitted: </b>
+                            @Html.DisplayFor(model => model.DateSubmited)
+                        </li>
+
+                        <li>
+                            <b>Languages: </b>
+                            @Html.DisplayFor(model => model.Languages)
+                        </li>
+
+                        <li>
+                            <b>Views: </b>
+                            @Html.DisplayFor(model => model.Views)
+                        </li>
+
+                        <li>
+                            <b>Rate: </b>
+                            @if (rate != Model.Rating)
+                            {
+                                for (int i = 0; i < rate; i++)
+                                {
+                                    <a href="@Url.Action("Rate", "Rating", new {idrate = Model.IDFilm, star = i + 1})"><i class="fa fa-star" aria-hidden="true" style="color: orange"></i></a>
+                                }
+                                rate++;
+                                <a href="@Url.Action("Rate", "Rating", new {idrate = Model.IDFilm, star = rate})"><i class="fa fa-star-half-alt" aria-hidden="true" style="color: orange"></i></a>
+                            }
+                            else
+                            {
+                                for (int i = 0; i < rate; i++)
+                                {
+                                    <a href="@Url.Action("Rate", "Rating", new {idrate = Model.IDFilm, star = i + 1})"><i class="fa fa-star" aria-hidden="true" style="color: orange"></i></a>
+                                }
+                            }
+                            @for (int i = rate; i < 5; i++)
+                            {
+                                <a href="@Url.Action("Rate", "Rating", new { idrate = Model.IDFilm, star = i + 1})"><i class="far fa-star" aria-hidden="true" style="color: orange"></i></a>
+                            }
+                            @{
+                                float tmpfl = (float)Model.Rating;
+                            }
+                            <span>(@tmpfl.ToString("0.0")) / @Html.DisplayFor(model => model.Votes) votes)</span>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="list-group" style="margin-top:1.5%">
+                    <li class="list-group-item active">Description</li>
+                    <li class="list-group-item">@Model.Description</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

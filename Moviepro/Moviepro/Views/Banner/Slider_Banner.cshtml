@@ -1,0 +1,12 @@
+﻿@using Moviepro.Models;
+@model List<TSql_Banner>
+
+<div id="slidey" style="display:none;">
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li><img src="@Url.Content("~/Content/images/" + item.Banner)" alt=" "><p class='title'>@item.FilmName</p><p class='description'>@item.Description</p></li>
+        }
+    </ul>
+</div>
+

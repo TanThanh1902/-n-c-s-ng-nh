@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f6360fd887df4c53bd8590e2470d58bf" Name="Diagram1">
+        <EntityTypeShape EntityType="DBMovieModel.sysdiagram" Width="1.5" PointX="5.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMovieModel.TSql_Banner" Width="1.5" PointX="7.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMovieModel.TSql_Categorys" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMovieModel.TSql_Chat" Width="1.5" PointX="5.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMovieModel.TSql_Comment" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMovieModel.TSql_Country" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMovieModel.TSql_Film_Category" Width="1.5" PointX="8.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMovieModel.TSql_Films" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMovieModel.TSql_Informations" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBMovieModel.TSql_Reply" Width="1.5" PointX="10.5" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="DBMovieModel.FK_TSql_Film_Category_TSql_Categorys" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMovieModel.FK_TSql_Comment_TSql_Films" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMovieModel.FK_TSql_Comment_TSql_Informations" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMovieModel.FK_TSql_Reply_TSql_Comment" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMovieModel.FK_TSql_Films_TSql_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMovieModel.FK_TSql_Film_Category_TSql_Films" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMovieModel.FK_TSql_Reply_TSql_Informations" ManuallyRouted="false" />
+        <AssociationConnector Association="DBMovieModel.FK_TSql_Chat_TSql_Informations" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

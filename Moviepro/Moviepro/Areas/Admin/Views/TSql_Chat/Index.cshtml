@@ -1,0 +1,35 @@
+﻿@using Moviepro.Models;
+@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<TSql_Chat>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color: red; text-align: center">Feedback</h2>
+<table class="table">
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <div style="margin-left: 3%" class="alert alert-success">
+                    <img src="~/Content/images/user.png" style="border-radius:100%;width:40px; height:40px; border:1px solid black; float: left" />
+                    <span style="margin-left: 15px;font-size: 16px;color: green; font-weight: bold">@item.TSql_Informations.DisplayName</span><br />
+                    <span style="font-size: 15px; margin-left:10px;color: black">@Html.DisplayFor(modelItem => item.Chat)</span>
+                    <span style="margin-left: 10px; float: right">@item.DateChat</span>
+                    <a href="@Url.Action("DeleteConfirmed", "TSql_Chat", new { @id = item.IDChat })" onclick="return confirm('Are your sure?')"><span style="margin-left: 10px; float: right">Delete</span><br /></a>
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+
+<center>
+    <div>
+        @*PageNumber @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount*@
+        @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page = Page }))
+    </div>
+</center>

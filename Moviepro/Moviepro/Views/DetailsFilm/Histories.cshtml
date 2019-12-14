@@ -1,0 +1,76 @@
+﻿@using Moviepro.Models;
+@model List<History>
+@{
+    ViewBag.Title = "Histories";
+    Layout = "~/Views/Layout/UserLayout.cshtml";
+}
+@Html.Action("History", "Menu")
+<div class="general">
+    <h4 class="latest-text w3_latest_text">History</h4>
+    <div class="container">
+        @if (Session["History"] == null)
+        {
+            <div class="container">
+                <div class="alert alert-danger" role="alert">
+                    <p>Not found</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                <div class="general">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-2 w3l-movie-gride-agile">
+                            <a href="@Url.Action("Index_W", "Comments", new { @id = item.IDFilm})" class="hvr-shutter-out-horizontal">
+                                <img src="@Url.Content("~/Content/images/" + item.Image)" title="album-name" class="img-responsive" alt=" " style="height: 270px; width: 100%" />
+                                <div class="w3l-action-icon"><i class="fas fa-play-circle" aria-hidden="true"></i></div>
+                            </a>
+                            <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                <div class="w3l-movie-text">
+                                    <h6><a href="@Url.Action("Index_W", "Comments", new { @id = item.IDFilm})">@item.FilmName</a></h6>
+                                </div>
+                                <div class="mid-2 agile_mid_2_home">
+                                    <p>@item.DateSubmited.Value.Year</p>
+                                    @{
+                                        Int32 tmp = (Int32)item.Rating;
+                                        if (tmp != item.Rating)
+                                        {
+                                            <div class="block-stars">
+                                                <ul class="w3l-ratings">
+                                                    @for (int k = 0; k < tmp; k++)
+                                                    {
+                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    }
+                                                    <li><i class="fa fa-star-half-alt" aria-hidden="true"></i></li>
+                                                </ul>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="block-stars">
+                                                <ul class="w3l-ratings">
+                                                    @for (int k = 0; k < tmp; k++)
+                                                    {
+                                                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        }
+                                    }
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="ribben">
+                                <p>NEW</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

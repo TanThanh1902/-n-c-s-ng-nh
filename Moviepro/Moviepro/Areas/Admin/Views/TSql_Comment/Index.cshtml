@@ -1,0 +1,74 @@
+﻿@using Moviepro.Models;
+@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<TSql_Comment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+    <h2 style="color: red; text-align: center">Comment</h2>
+<table class="table">
+
+    @foreach (var itemcmt in Model)
+    {
+        <tr>
+            <td>
+                <div style="margin-left: 3%" class="alert alert-success">
+                    <img src="~/Content/images/user.png" style="border-radius:100%;width:40px; height:40px; border:1px solid black; float: left" />
+                    <span style="margin-left: 15px;font-size: 16px;color: green; font-weight: bold">@itemcmt.TSql_Informations.DisplayName</span><br />
+                    <span style="font-size: 15px; margin-left:10px;color: black">@Html.DisplayFor(modelItem => itemcmt.Comment)</span>
+                    <span style="margin-left: 10px; float: right">@itemcmt.DatePost</span>
+                    @if (itemcmt.TSql_Reply.Count == 0)
+                    {
+                        <a href="@Url.Action("DeleteConfirmed", "TSql_Comment", new { @id = itemcmt.IDComment })" onclick="return confirm('Are your sure?')"><span style="margin-left: 10px; float: right">Delete</span><br /></a>
+                    }
+                    else
+                    {
+                        <a href="#" onclick="return confirm('Can not delete')"><span style="margin-left: 10px; float: right">Delete</span><br /></a>
+                    }
+                    <a data-toggle="collapse" data-target="#@itemcmt.IDComment" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" style="color: black; font-weight:bold;float: right;font-size: 10px;color: white" class="btn btn-danger">VIEW REPLY</a>
+
+                </div>
+                <div class="pos-f-t">
+                    <div class="collapse" id="@itemcmt.IDComment">
+                        @foreach (var itemrep in itemcmt.TSql_Reply)
+                        {
+                            <div style="margin-left: 10%" class="alert alert-success">
+                                <img src="~/Content/images/user.png" style="border-radius:100%;width:40px; height:40px; border:1px solid black; float: left" />
+                                <span style="margin-left: 15px;font-size: 16px;color: green; font-weight: bold">@itemcmt.TSql_Informations.DisplayName</span><br />
+                                <span style="margin-left: 15px;font-size: 16px;color: black;">@itemrep.Reply</span><br />
+                                <span style="margin-left: 10px; float: right">@itemcmt.DatePost</span>
+                                <a href="#"><span style="margin-left: 10px; float: right">Delete</span><br /></a>
+                            </div>
+                        }
+                        <br />
+                        @using (Html.BeginForm("PostReply", "Comments", FormMethod.Post))
+                        {
+                            <input type="hidden" name="idcmt" value="@itemcmt.IDComment" />
+                            <input type="text" name="Reply" style="margin-left:5%; width: 96%; height: 50px" min="50" required class="form-control" placeholder="Reply..." />
+                            if (Session["flag"] != null)
+                            {
+                                <input type="submit" value="" class="" style="margin-top: 2%;float: left;margin-left: 1%;background-color: white; border: 0px solid white" />
+                            }
+                            else
+                            {
+                                <a href="#" data-toggle="modal" data-target="#myModal"><input type="submit" value="" class="" style="margin-top: 2%;float: left;margin-left: 1%;background-color: white; border: 0px solid white" /></a>
+                            }
+
+                        }
+                    </div>
+                </div>
+
+            </td>
+        </tr>
+    }
+</table>
+
+<center>
+    <div>
+        @*PageNumber @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount*@
+        @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page = Page }))
+    </div>
+</center>

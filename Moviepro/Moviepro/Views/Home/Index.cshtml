@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/UserLayout.cshtml";
+}
+
+@Html.Action("Home", "Menu")
+<!-- banner -->
+@Html.Action("Slider_Banner", "Banner")
+<!-- //banner -->
+<!-- banner-bottom -->
+@Html.Action("Slider_New", "Slider")
+<!-- general -->
+@Html.Action("Index", "Featured")
+<!-- //general -->

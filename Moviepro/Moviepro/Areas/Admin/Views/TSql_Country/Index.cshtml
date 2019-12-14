@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Moviepro.Models.TSql_Country>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .mau {
+        color: black;
+    }
+</style>
+<h2 style="color: red;text-align: center">Country</h2>
+
+<a href="@Url.Action("Create")" class="btn btn-danger">Create New</a>
+<hr />
+<table class="table table-striped" style="border:1px solid black;color: black">
+    <tr style="background-color: orange;">
+        <th>
+            <b class="mau"><i class="fa fa-list-alt">&nbsp;</i>IDCountry</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-globe">&nbsp;</i>CountryName</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-tools">&nbsp;</i>Tool</b>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDCountry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryName)
+            </td>
+            <td>
+                <a href="/Admin/TSql_Country/Edit/@item.IDCountry"><b><i class="fa fa-edit"></i></b></a>
+                @if (item.TSql_Films.Count == 0)
+                {
+                    <a href="@Url.Action("DeleteConfirmed", "TSql_Country", new { @id = item.IDCountry })" onclick="return confirm('Are your sure?')"><b><i class="fa fa-trash-alt"></i></b></a>
+                }
+                else
+                {
+                    <a href="#" onclick="return confirm('Can not delete')"><b><i class="fa fa-trash-alt"></i></b></a>
+                }
+            </td>
+        </tr>
+    }
+
+</table>

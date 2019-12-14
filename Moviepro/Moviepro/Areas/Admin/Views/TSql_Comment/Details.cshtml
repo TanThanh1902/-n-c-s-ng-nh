@@ -1,0 +1,51 @@
+﻿@model Moviepro.Models.TSql_Comment
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TSql_Comment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatePost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatePost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TSql_Films.FilmName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TSql_Films.FilmName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TSql_Informations.DisplayName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TSql_Informations.DisplayName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDComment }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

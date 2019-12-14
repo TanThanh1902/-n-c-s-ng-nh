@@ -1,0 +1,17 @@
+﻿@using Moviepro.Models;
+@model List<TSql_Categorys>
+
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">Genres <b class="caret"></b></a>
+<ul class="dropdown-menu multi-column columns-3">
+    <li>
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-4">
+                <ul class="multi-column-dropdown">
+                    <li><a href="@Url.Action("Search_Category", "Search", new { @id = item.IDCategory })">@item.CategoryName</a></li>
+                </ul>
+            </div>
+        }
+        <div class="clearfix"></div>
+    </li>
+</ul>
